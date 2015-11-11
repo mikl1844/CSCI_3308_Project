@@ -9,7 +9,7 @@ void finish_with_error(MYSQL *con)
   exit(1);
 }
 
-int Pull_Data(int id, char[16] field)
+int Pull_Data(int id, char field[])
 {
   char query[64];
 
@@ -39,6 +39,7 @@ int Pull_Data(int id, char[16] field)
 int main()
 {
   int id = 0;
+  float result;
   char column[16] = "Temperature";
   result = Pull_Data(id, column);
   printf("Temperature: %f", result);

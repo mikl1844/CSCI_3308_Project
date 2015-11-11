@@ -39,6 +39,7 @@ int Push_Data(int id, float data)
 int main()
 {
   int id = 2;
+  int status;
   float data = 73.37;
   status = Push_Data(id, data);
   if(status == 0)
