@@ -9,14 +9,12 @@ void finish_with_error(MYSQL *con)
   exit(1);
 }
 
-int main()//want to make it look like Lock(int id, int status)
+int Lock(int id, int status)//want to make it look like Lock(int id, int status)
 {
   MYSQL *con = mysql_init(NULL);
   
   char House_DB[50];
   char House_Data[50];
-  int id = 1;
-  int status = 1;
   if(con == NULL)
   {
     fprintf(stderr, "%s\n", mysql_error(con));
@@ -56,4 +54,16 @@ int main()//want to make it look like Lock(int id, int status)
   }
   mysql_close(con);
   exit(0);
+}
+
+int main()
+{
+int id = 3;
+int ret;
+int status = 0;
+ret = Lock(id,status);
+if(ret == 0)
+  exit(0);
+else
+  exit(1);
 }
