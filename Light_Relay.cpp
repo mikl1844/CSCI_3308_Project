@@ -9,7 +9,7 @@ void finish_with_error(MYSQL *con)
   exit(1);
 }
 
-int Lock(int id, int status)//want to make it look like Lock(int id, int status)
+int lightRelay(int id, int status)
 {
   MYSQL *con = mysql_init(NULL);
   
@@ -27,12 +27,12 @@ int Lock(int id, int status)//want to make it look like Lock(int id, int status)
   }
   if (status == 0)
   {
-    sprintf(House_DB, "UPDATE House_DB SET SmartLock='close' WHERE ID=%d",id);
+    sprintf(House_DB, "UPDATE House_DB SET LightRelay='off' WHERE ID=%d",id);
     if (mysql_query(con,House_DB))//House_DB Query
     {
       finish_with_error(con);
     }
-    sprintf(House_Data, "UPDATE House_Data SET Lock_Status=%d",status);
+    sprintf(House_Data, "UPDATE House_Data SET Relay_Status=%d",status);
     if (mysql_query(con, House_Data))//House_Data Query
     {
       finish_with_error(con);
@@ -41,12 +41,12 @@ int Lock(int id, int status)//want to make it look like Lock(int id, int status)
   else
   {
     status = 1;
-    sprintf(House_DB, "UPDATE House_DB SET SmartLock='open' WHERE ID=%d",id);
+    sprintf(House_DB, "UPDATE House_DB SET LightRelay='on' WHERE ID=%d",id);
     if (mysql_query(con,House_DB))//House_DB Query
     {
       finish_with_error(con);
     }
-    sprintf(House_Data, "UPDATE House_Data SET Lock_Status=%d",status);
+    sprintf(House_Data, "UPDATE House_Data SET Relay_Status=%d",status);
     if (mysql_query(con, House_Data))//House_Data Query
     {
       finish_with_error(con);
@@ -58,10 +58,10 @@ int Lock(int id, int status)//want to make it look like Lock(int id, int status)
 
 int main()
 {
-int id = 3;
+int id = 2;
 int ret;
-int status = 0;
-ret = Lock(id,status);
+int status = 1;
+ret = lightRelay(id,status);
 if(ret == 0)
   exit(0);
 else

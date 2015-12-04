@@ -14,13 +14,14 @@ CREATE TABLE IF NOT EXISTS `House_DB` (
 `ID` int(1) NOT NULL auto_increment,
 `Temperature` int(1) NOT NULL,
 `SmartLock` varchar(5) NOT NULL,
+`LightRelay` varchar(3) NOT NULL,
 PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
-INSERT INTO `House_DB` (`ID`, `Temperature`, `SmartLock`) VALUES
-        (1,75,'open'),
-        (2,67,'close'),
-        (3,72,'1234');
+INSERT INTO `House_DB` (`ID`, `Temperature`, `SmartLock`,`LightRelay`) VALUES
+        (1,75,'open','off'),
+        (2,67,'close','off'),
+        (3,72,'1234','off');
 
 CREATE TABLE IF NOT EXISTS `House_Data` (
 `Avg_Temp` int(1) NOT NULL,
