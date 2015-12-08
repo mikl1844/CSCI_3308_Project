@@ -137,21 +137,30 @@ int setActiveUserSQL(char username[], int *start_hour, int *end_hour, int *start
   mysql_close(con);
   return 0;
 }
-/*
-int main()
+
+int deleteUserSQL(char username[])
 {
-   char username[] = "talley";
-   char start_time[] = "15:48";
-   char end_time[] = "22:00";
-   int temperature = 20;
-   int hour_start = 0;
-   int hour_stop = 0;
-   int minute_start = 0;
-   int minute_stop = 0;
-   //int x = addUserSQL(username, start_time, end_time, temperature);
-   //int x = showUsersSQL();
-   int x = setActiveUserSQL(username, &hour_start, &hour_stop, &minute_start, &minute_stop, &temperature);
-   printf("%d, %d, %d, %d, %d\n", hour_start, hour_stop, minute_start, minute_stop, temperature);
-   return 0;
+  char query[64];
+
+  MYSQL *con = mysql_init(NULL);
+
+  if(con == NULL)
+  {
+    fprintf(stderr, "%s\n", mysql_error(con));
+    return -1;
+  }
+  
+  if (mysql_real_connect(con,"localhost","root","","project",0,NULL,0)==NULL)
+  {
+    finish_with_error(con);
+  }
+
+  sprintf(query, "DELETE FROM Users WHERE Username='%s';", username);
+  if (mysql_query(con, query))
+  {
+    finish_with_error(con);
+  }
+
+  mysql_close(con);
+  return 0;
 }
-*/
